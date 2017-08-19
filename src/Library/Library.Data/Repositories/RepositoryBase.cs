@@ -29,10 +29,11 @@ namespace Library.Data.Repositories
 			return DbSet.FirstOrDefault(t => t.Id == id);
 		}
 
-		public void Save(T entity)
+		public T Save(T entity)
 		{
 			DbSet.Add(entity);
 			LibraryDbContext.SaveChanges();
+			return entity;
 		}
 	}
 }

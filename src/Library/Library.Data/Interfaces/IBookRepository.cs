@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Library.Data.Models;
 
 namespace Library.Data.Interfaces
 {
-	public interface IGenericRepository<T> where T: IHasId
+	public interface IBookRepository: IGenericRepository<Book>
 	{
-		T GetById(int id);
-		IEnumerable<T> GetAllForIds(int[] ids);
-		T Save(T entity);
 	}
 }
