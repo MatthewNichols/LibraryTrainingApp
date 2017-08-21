@@ -36,7 +36,16 @@ namespace Library.Data.Repositories
 
 		public T Save(T entity)
 		{
-			DbSet.Add(entity);
+			if (entity.Id == 0)
+			{
+				DbSet.Add(entity);
+			}
+			else
+			{
+				var entityToUpdate = GetById(entity.Id);
+				LibraryDbContext.Entry(entityToUpdate).CurrentValues.SetValues(entity);
+			}
+			
 			LibraryDbContext.SaveChanges();
 			return entity;
 		}

@@ -46,7 +46,8 @@ namespace Library.Web.Controllers
 		public BookResource Put(int id, [FromBody]BookResource bookResource)
 	    {
 		    var book = Mapper.Map<Book>(bookResource);
-			
+
+		    book.Id = id;	
 		    var savedBook = _bookRepository.Save(book);
 
 		    return Mapper.Map<BookResource>(savedBook);
