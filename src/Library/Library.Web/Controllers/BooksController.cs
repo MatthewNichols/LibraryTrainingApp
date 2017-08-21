@@ -22,7 +22,6 @@ namespace Library.Web.Controllers
 		    _bookRepository = DependencyManagement.BookRepository;
 	    }
 
-		[HttpPost]
 	    public BookResource Post([FromBody]BookResource bookResource)
 	    {
 		    var book = Mapper.Map<Book>(bookResource);

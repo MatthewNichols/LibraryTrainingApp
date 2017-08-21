@@ -26,8 +26,11 @@ namespace Library.Data
 				.Map(m => m.ToTable("BookAuthors").MapLeftKey("AuthorId").MapRightKey("BookId"));
 
 			modelBuilder.Entity<Book>()
-				.Property(e => e.ISBN)
-				.IsFixedLength();
+				.MapToStoredProcedures(s =>
+				{
+					s.Insert(u => u.HasName("Book_Insert"));
+				});
+//				.Property(e => e.ISBN).IsFixedLength();
 		}
 	}
 }
