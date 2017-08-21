@@ -24,6 +24,11 @@ namespace Library.Data.Repositories
 			return DbSet.Where(t => ids.Contains(t.Id));
 		}
 
+		public IEnumerable<T> GetAll()
+		{
+			return DbSet;
+		}
+
 		public T GetById(int id)
 		{
 			return DbSet.FirstOrDefault(t => t.Id == id);
@@ -32,6 +37,19 @@ namespace Library.Data.Repositories
 		public T Save(T entity)
 		{
 			DbSet.Add(entity);
+			LibraryDbContext.SaveChanges();
+			return entity;
+		}
+
+		public T Delete(int id)
+		{
+			var entity = GetById(id);
+			if (entity == null)
+			{
+				throw new ArgumentException(@"No entity with that Id", nameof(id));
+			}
+
+			DbSet.Remove(entity);
 			LibraryDbContext.SaveChanges();
 			return entity;
 		}
