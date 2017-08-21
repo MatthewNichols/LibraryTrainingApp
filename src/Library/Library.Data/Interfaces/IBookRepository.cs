@@ -9,5 +9,6 @@ namespace Library.Data.Interfaces
 {
 	public interface IBookRepository: IGenericRepository<Book>
 	{
+		IEnumerable<Book> Search(string searchString);
 	}
 }

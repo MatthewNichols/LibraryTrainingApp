@@ -15,5 +15,10 @@ namespace Library.Data.Repositories
 		{
 			
 		}
+
+		public IEnumerable<Book> Search(string searchString)
+		{
+			return DbSet.Where(b => b.Title.Contains(searchString));
+		}
 	}
 }

@@ -12,7 +12,7 @@ using Library.Web.App_Start;
 
 namespace Library.Web.Controllers
 {
-	[RoutePrefix("/api/books")]
+	[RoutePrefix("api/books")]
     public class BooksController : ApiController
     {
 	    private IBookRepository _bookRepository;
@@ -34,6 +34,14 @@ namespace Library.Web.Controllers
 		    return Mapper.Map<BookResource>(book);
 	    }
 
+		[HttpGet]
+		[Route("search/{searchString}")]
+		public IEnumerable<BookResource> Search(string searchString)
+		{
+			var books = _bookRepository.Search(searchString);
+			return Mapper.Map<IEnumerable<BookResource>>(books);
+		}
+		
 	    public BookResource Post([FromBody]BookResource bookResource)
 	    {
 		    var book = Mapper.Map<Book>(bookResource);
