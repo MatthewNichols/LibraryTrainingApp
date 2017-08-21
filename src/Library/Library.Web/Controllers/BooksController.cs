@@ -19,7 +19,10 @@ namespace Library.Web.Controllers
 
 	    public BooksController()
 	    {
-		    _bookRepository = DependencyManagement.BookRepository;
+			// How to handle Dependencies is beyond the scope of what I am working on here, so here is a simple 
+			// encapsulation to keep my controlers from being too connected to contrete repositories. I only feel a little 
+			// dirty doing it.
+			_bookRepository = DependencyManagement.BookRepository;
 	    }
 
 	    public IEnumerable<BookResource> Get()

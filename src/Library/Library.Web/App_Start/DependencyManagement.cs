@@ -11,6 +11,11 @@ using Library.Web.ApiResources;
 
 namespace Library.Web.App_Start
 {
+	/// <summary>
+	/// How to handle Dependencies is beyond the scope of what I am working on here, so here is a simple 
+	/// encapsulation to keep my controlers from being too connected to contrete repositories. I only feel a little 
+	/// dirty doing it.
+	/// </summary>
 	public class DependencyManagement
 	{
 		private static readonly LibraryDbContext LibraryDbContext = new LibraryDbContext();
@@ -32,11 +37,10 @@ namespace Library.Web.App_Start
 						var authors = AuthorRepository.GetAllForIds(src.AuthorIds.ToArray()).ToList();
 						dest.Authors = authors;
 					});
-
 				config.CreateMap<Book, BookResource>();
+
 				config.CreateMap<Author, AuthorResource>();
-
-
+				config.CreateMap<AuthorResource, Author>();
 			});
 		}
 	}
